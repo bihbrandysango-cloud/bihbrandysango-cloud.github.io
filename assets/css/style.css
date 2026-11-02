@@ -246,3 +246,22 @@ a.ccard:hover .cicon { background: rgba(232, 121, 214, .16); }
 .abtext .tl span { color: var(--gold); font-weight: 700; margin-right: 8px; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; }
 .abtext a.inl { color: var(--coral); font-weight: 700; border-bottom: 1px solid var(--bronze); }
 .abtext a.inl:hover { color: var(--gold); }
+
+/* video project card */
+.vcard .shot { position: relative; }
+.vcard .cover { width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer; }
+.vcard .shot::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to bottom, transparent 72%, rgba(21, 11, 18, .6)); }
+.vcard .ticker { position: absolute; left: 0; right: 0; top: 0; z-index: 3; overflow: hidden; white-space: nowrap; background: rgba(21, 11, 18, .86); border-bottom: 1px solid var(--line); color: var(--gold); font: 700 10px/1 ui-monospace, Consolas, monospace; letter-spacing: .08em; padding: 6px 0; }
+.vcard .ticker span { display: inline-block; animation: vticker 60s linear infinite; }
+@keyframes vticker { to { transform: translateX(-50%); } }
+.vcard .badge { position: absolute; left: 12px; top: 34px; z-index: 3; display: inline-flex; align-items: center; gap: 7px; background: rgba(21, 11, 18, .86); border: 1px solid rgba(247, 185, 85, .45); border-radius: 99px; padding: 4px 11px; color: var(--gold); font: 700 9.5px/1.2 ui-monospace, Consolas, monospace; letter-spacing: .08em; pointer-events: none; }
+.vcard .badge i { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
+.vcard .play { position: absolute; right: 12px; bottom: 12px; z-index: 3; width: 44px; height: 44px; border: 0; border-radius: 50%; display: grid; place-items: center; cursor: pointer; background: var(--grad); color: #150b12; box-shadow: 0 6px 18px rgba(0, 0, 0, .45); transition: transform .2s; }
+.vcard .play:hover { transform: scale(1.08); }
+.vcard button.btn { font-family: inherit; cursor: pointer; }
+@media (min-width: 900px) { .vcard.feature { grid-column: span 2; } }
+.vmodal { width: min(1100px, 94vw); padding: 0; border: 1px solid var(--line); border-radius: var(--radius); background: #000; overflow: hidden; }
+.vmodal::backdrop { background: rgba(10, 5, 9, .85); }
+.vmodal video { display: block; width: 100%; height: auto; }
+.vmodal .x { position: absolute; right: 10px; top: 10px; z-index: 2; width: 36px; height: 36px; border: 0; border-radius: 50%; cursor: pointer; background: rgba(21, 11, 18, .85); color: var(--text); font-size: 18px; }
+@media (prefers-reduced-motion: reduce) { .vcard .ticker span { animation: none; } }
