@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palmpay Sales Analysis | Interactive dashboard</title>
+<meta name="description" content="Interactive web version of the Palmpay Power BI report: five years of US and German bicycle sales, 2007 to 2011.">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b1020;--panel:#121936;--panel2:#171f44;--line:#242e5c;--text:#e6e9f8;--muted:#8d96ba;--violet:#8b6cff;--teal:#f5b84b;--sky:#38bdf8;--amber:#f5b84b;--pink:#f472b6;--slate:#94a3b8}
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--text);font-family:"Plus Jakarta Sans",system-ui,"Segoe UI",sans-serif;overflow:hidden}
+.app{display:grid;grid-template-columns:150px 1fr;height:100vh;gap:18px;padding:16px}
+.rail{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:14px 12px;display:flex;flex-direction:column;gap:6px}
+.rail .logo{width:64px;height:64px;margin:2px auto 10px;border-radius:16px}
+.navb{border:0;background:none;color:var(--muted);font:600 13px "Plus Jakarta Sans",sans-serif;text-align:left;padding:10px 12px;border-radius:12px;cursor:pointer;transition:.2s}
+.navb:hover{color:var(--text);background:var(--panel2)}
+.navb.on{background:linear-gradient(100deg,var(--violet),#6d4df0);color:#fff}
+.side{margin-top:auto;border-radius:16px;overflow:hidden;line-height:0}.side img{width:100%;display:block}
+.main{display:grid;grid-template-rows:auto auto 1fr;gap:14px;min-width:0;min-height:0}
+.top{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.top h1{margin:0;font-size:26px;letter-spacing:-.5px;font-weight:800}
+.top p{margin:2px 0 0;color:var(--muted);font-size:13px}
+.tourbtn{margin-left:6px;border:0;background:linear-gradient(100deg,var(--violet),var(--teal));color:#07101f;font:700 12px "Plus Jakarta Sans",sans-serif;padding:9px 16px;border-radius:999px;cursor:pointer}
+.years{margin-left:auto;display:flex;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px}
+.yb{border:0;background:none;color:var(--muted);font:700 12px "Plus Jakarta Sans",sans-serif;padding:7px 13px;border-radius:999px;cursor:pointer;transition:.2s}
+.yb:hover{color:var(--text)}.yb.on{background:var(--violet);color:#fff}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:14px 16px;min-width:0;min-height:0;position:relative}
+.kpi .l{color:var(--muted);font-size:12px;font-weight:600}.kpi .v{font-size:30px;font-weight:800;letter-spacing:-1px;margin:2px 0}
+.kpi .d{font-size:12px;font-weight:700}.up{color:var(--sky)}.dn{color:var(--pink)}.flat{color:var(--muted)}
+.kpi canvas{position:absolute;right:12px;bottom:10px;width:46%!important;height:46px!important}
+.view{display:none;min-height:0}.view.on{display:grid;animation:fade .5s ease}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.grid1{grid-template-columns:1.7fr 1fr 1fr;grid-template-rows:1.05fr 1fr;gap:14px}
+.grid1 .wide{grid-column:1/4}
+h3{margin:0 0 8px;font-size:13px;font-weight:700}.sub{color:var(--muted);font-weight:500}
+.cw{position:relative;height:calc(100% - 26px)}
+.pill{display:inline-flex;gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px;float:right}
+.pill button{border:0;background:none;color:var(--muted);font:700 11px "Plus Jakarta Sans",sans-serif;padding:4px 10px;border-radius:999px;cursor:pointer}.pill button.on{background:var(--panel2);color:var(--text)}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:6px 8px;text-align:right;border-bottom:1px solid var(--line)}th:first-child,td:first-child{text-align:left}
+th{color:var(--muted);font-weight:700;font-size:11px}tr.tot td{font-weight:800;border-bottom:0}.tw{overflow:auto;height:calc(100% - 26px)}
+.grid2{grid-template-columns:1.4fr 1fr;grid-template-rows:1fr auto;gap:14px}
+.ins{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;grid-column:1/3}
+.ins .card b{font-size:22px;display:block;letter-spacing:-.5px}.ins .card span{color:var(--muted);font-size:12px}
+.grid3{grid-template-columns:1.3fr 1fr;gap:14px}
+/* tour */
+.tour{position:fixed;inset:0;z-index:50;display:none}.tour.on{display:block}
+.hole{position:fixed;border:2px solid var(--teal);border-radius:16px;box-shadow:0 0 0 9999px rgba(5,8,20,.78);transition:.45s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.tc{position:fixed;width:340px;background:#fff;color:#1b1f3a;border-radius:18px;padding:18px 20px;transition:.45s cubic-bezier(.2,.7,.2,1);box-shadow:0 18px 50px rgba(0,0,0,.45)}
+.tc h4{margin:0 0 6px;font-size:16px;color:#4b34c9}.tc p{margin:0 0 14px;font-size:13px;line-height:1.55;color:#454a6b}
+.tc .row{display:flex;align-items:center;gap:8px}.tc .n{margin-right:auto;font-size:11px;color:#8a8fb0}
+.tc button{border:1px solid #6d4df0;background:#fff;color:#4b34c9;font:700 12px "Plus Jakarta Sans",sans-serif;padding:7px 14px;border-radius:999px;cursor:pointer}.tc button.go{background:#6d4df0;color:#fff}
+@media (max-width:1100px){body{overflow:auto}.app{grid-template-columns:1fr;height:auto}.rail{flex-direction:row;flex-wrap:wrap;align-items:center}.side{display:none}.kpis{grid-template-columns:repeat(2,1fr)}.grid1,.grid2,.grid3{grid-template-columns:1fr;grid-template-rows:none}.grid1 .wide,.ins{grid-column:auto}.ins{grid-template-columns:1fr}.cw{height:260px}.kpi canvas{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="rail">
+    <img class="logo" src="img/logo.png" alt="Palmpay logo">
+    <button class="navb on" data-v="overview">Overview</button>
+    <button class="navb" data-v="countries">US vs Germany</button>
+    <button class="navb" data-v="cities">Cities</button>
+    <div class="side"><img src="img/side.png" alt="Five years of sales, 2007 to 2011"></div>
+  </aside>
+  <main class="main">
+    <div class="top">
+      <div><h1>Palmpay Sales Analysis</h1><p>Revenue, profit, units sold and city performance, 2007 to 2011</p></div>
+      <button class="tourbtn" id="tourBtn">Take the tour</button>
+      <div class="years" id="years"></div>
+    </div>
+    <div class="kpis" id="kpis"></div>
+
+    <section class="view on grid1" id="v-overview">
+      <div class="card" id="c-line"><h3>Monthly revenue <span class="sub">USD millions</span>
+        <span class="pill" id="lineMode"><button class="on" data-m="total">Total</button><button data-m="country">By country</button></span></h3><div class="cw"><canvas id="lineCh"></canvas></div></div>
+      <div class="card" id="c-country"><h3>Revenue by country</h3><div class="cw"><canvas id="countryCh"></canvas></div></div>
+      <div class="card" id="c-cat"><h3>Revenue by product category</h3><div class="cw"><canvas id="catCh"></canvas></div></div>
+      <div class="card wide" id="c-table"><h3>Revenue by category and year <span class="sub">USD</span></h3><div class="tw" id="catTable"></div></div>
+    </section>
+
+    <section class="view grid2" id="v-countries">
+      <div class="card"><h3>Revenue by year and country <span class="sub">USD millions</span></h3><div class="cw"><canvas id="ycCh"></canvas></div></div>
+      <div class="card"><h3>Gross margin by country <span class="sub">%</span></h3><div class="cw"><canvas id="mgCh"></canvas></div></div>
+      <div class="ins" id="insights"></div>
+    </section>
+
+    <section class="view grid3" id="v-cities">
+      <div class="card"><h3>Top 10 cities by revenue <span class="sub">USD millions</span></h3><div class="cw"><canvas id="cityCh"></canvas></div></div>
+      <div class="card"><h3>All cities <span class="sub">revenue, margin</span></h3><div class="tw" id="cityTable"></div></div>
+    </section>
+  </main>
+</div>
+
+<div class="tour" id="tour"><div class="hole" id="hole"></div><div class="tc" id="tc"><h4 id="tt"></h4><p id="tp"></p><div class="row"><span class="n" id="tn"></span><button id="tb">Back</button><button class="go" id="tx">Next</button></div></div></div>
+
+<script src="vendor/chart.umd.min.js"></script>
+<script src="data.js"></script>
+<script>
+(function(){
+var C=window.PALMPAY.cols,R=window.PALMPAY.rows.map(function(r){var o={};C.forEach(function(c,i){o[c]=r[i]});return o});
+var YEARS=[2007,2008,2009,2010,2011],MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+var CAT={ACC:"Accessories",ORB:"Off-road bikes",ROB:"Road bikes",TOU:"Touring bikes",EBI:"EBI",TRE:"TRE"};
+var CCOL={ACC:"#94a3b8",ORB:"#f5b84b",ROB:"#38bdf8",TOU:"#8b6cff",EBI:"#fb7185",TRE:"#e879f9"};
+var CTRY={DE:"Germany",US:"United States"},TCOL={DE:"#8b6cff",US:"#f5b84b"};
+var sel=YEARS.slice(),mode="total",view="overview",charts={};
+Chart.defaults.color="#8d96ba";Chart.defaults.font.family='"Plus Jakarta Sans",sans-serif';Chart.defaults.font.size=11;
+Chart.defaults.borderColor="rgba(36,46,92,.7)";Chart.defaults.plugins.legend.labels.boxWidth=10;Chart.defaults.plugins.legend.labels.usePointStyle=true;
+function rows(){return R.filter(function(r){return sel.indexOf(r.year)>-1})}
+function sum(a,k){return a.reduce(function(s,r){return s+r[k]},0)}
+function M(n){return"$"+(n/1e6).toFixed(n>=1e7?0:1)+"M"}function M2(n){return"$"+(n/1e6).toFixed(2)+"M"}
+function fmt(n){return"$"+Math.round(n).toLocaleString("en-US")}
+function group(a,key){var o={};a.forEach(function(r){var k=typeof key==="function"?key(r):r[key];(o[k]=o[k]||[]).push(r)});return o}
+function mk(id,cfg){if(charts[id]){charts[id].data=cfg.data;charts[id].options=cfg.options;charts[id].update();return}charts[id]=new Chart(document.getElementById(id),cfg)}
+
+function yearsUI(){var h='<button class="yb'+(sel.length==5?' on':'')+'" data-y="all">All years</button>';YEARS.forEach(function(y){h+='<button class="yb'+(sel.length<5&&sel.indexOf(y)>-1?' on':'')+'" data-y="'+y+'">'+y+'</button>'});document.getElementById("years").innerHTML=h}
+document.getElementById("years").addEventListener("click",function(e){var y=e.target.getAttribute("data-y");if(!y)return;
+ if(y==="all")sel=YEARS.slice();else{y=+y;if(sel.length==5)sel=[y];else if(sel.indexOf(y)>-1){sel=sel.filter(function(v){return v!==y});if(!sel.length)sel=YEARS.slice()}else sel.push(y)}
+ render()});
+document.querySelectorAll(".navb").forEach(function(b){b.addEventListener("click",function(){setView(b.getAttribute("data-v"))})});
+function setView(v){view=v;document.querySelectorAll(".navb").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-v")===v)});document.querySelectorAll(".view").forEach(function(s){s.classList.toggle("on",s.id==="v-"+v)});render()}
+document.getElementById("lineMode").addEventListener("click",function(e){var m=e.target.getAttribute("data-m");if(!m)return;mode=m;this.querySelectorAll("button").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-m")===m)});render()});
+
+function kpis(){var a=rows(),rev=sum(a,"rev"),cg=sum(a,"cogm"),pr=rev-cg,q=sum(a,"qty"),mg=pr/rev;
+ var prev=null;if(sel.length==1&&sel[0]>2007){var p=R.filter(function(r){return r.year==sel[0]-1});var pv=sum(p,"rev"),pc=sum(p,"cogm");prev={rev:pv,pr:pv-pc,mg:(pv-pc)/pv,q:sum(p,"qty")}}
+ function dl(c,p,pct){if(!prev)return'<span class="flat">'+(sel.length==5?"2007 to 2011":sel.slice().sort().join(", "))+'</span>';var x=pct?(c-p)*100:((c-p)/p)*100;var cls=x>0.05?"up":x<-0.05?"dn":"flat";return'<span class="'+cls+'">'+(x>0?"▲ ":x<0?"▼ ":"")+Math.abs(x).toFixed(1)+(pct?" pts":"%")+' vs '+(sel[0]-1)+'</span>'}
+ var items=[["Revenue",M(rev),dl(rev,prev&&prev.rev),"rev"],["Gross profit",M(pr),dl(pr,prev&&prev.pr),"pr"],["Gross margin",(mg*100).toFixed(1)+"%",dl(mg,prev&&prev.mg,true),"mg"],["Units sold",Math.round(q/1000)+"K",dl(q,prev&&prev.q),"q"]];
+ document.getElementById("kpis").innerHTML=items.map(function(it,i){return'<div class="card kpi" id="k'+i+'"><div class="l">'+it[0]+'</div><div class="v">'+it[1]+'</div><div class="d">'+it[2]+'</div><canvas id="sp'+i+'"></canvas></div>'}).join("");
+ var mo=group(a,function(r){return r.year*100+r.month}),keys=Object.keys(mo).sort();
+ [["rev",function(x){return sum(x,"rev")}],["pr",function(x){return sum(x,"rev")-sum(x,"cogm")}],["mg",function(x){return(sum(x,"rev")-sum(x,"cogm"))/sum(x,"rev")}],["q",function(x){return sum(x,"qty")}]].forEach(function(s,i){
+  new Chart(document.getElementById("sp"+i),{type:"line",data:{labels:keys,datasets:[{data:keys.map(function(k){return s[1](mo[k])}),borderColor:i%2?"#f5b84b":"#8b6cff",borderWidth:2,pointRadius:0,tension:.35,fill:false}]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:900},plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{display:false},y:{display:false}}}})})}
+
+function overview(){var a=rows(),mo=group(a,function(r){return r.year*100+r.month}),keys=Object.keys(mo).sort();
+ var labels=keys.map(function(k){var y=Math.floor(k/100),m=k%100;return MON[m-1]+" "+y});
+ var ds;if(mode==="total")ds=[{label:"Revenue",data:keys.map(function(k){return sum(mo[k],"rev")/1e6}),borderColor:"#8b6cff",backgroundColor:"rgba(139,108,255,.16)",fill:true,borderWidth:2.5,pointRadius:0,tension:.35}];
+ else ds=["DE","US"].map(function(c){return{label:CTRY[c],data:keys.map(function(k){return sum(mo[k].filter(function(r){return r.country===c}),"rev")/1e6}),borderColor:TCOL[c],borderWidth:2.5,pointRadius:0,tension:.35,fill:false}});
+ mk("lineCh",{type:"line",data:{labels:labels,datasets:ds},options:{responsive:true,maintainAspectRatio:false,animation:{duration:900},interaction:{mode:"index",intersect:false},plugins:{legend:{display:mode!=="total"},tooltip:{callbacks:{label:function(c){return c.dataset.label+": $"+c.parsed.y.toFixed(2)+"M"}}}},scales:{y:{ticks:{callback:function(v){return"$"+v+"M"}},grid:{color:"rgba(36,46,92,.5)"}},x:{ticks:{maxTicksLimit:8,maxRotation:0},grid:{display:false}}}}});
+ var cg=group(a,"country");mk("countryCh",{type:"doughnut",data:{labels:["Germany","United States"],datasets:[{data:["DE","US"].map(function(c){return sum(cg[c]||[],"rev")}),backgroundColor:["#8b6cff","#f5b84b"],borderColor:"#121936",borderWidth:3}]},options:{responsive:true,maintainAspectRatio:false,cutout:"62%",animation:{duration:900},plugins:{legend:{position:"bottom"},tooltip:{callbacks:{label:function(c){var t=c.dataset.data.reduce(function(s,v){return s+v},0);return c.label+": "+M2(c.parsed)+" ("+(c.parsed/t*100).toFixed(1)+"%)"}}}}}});
+ var cc=group(a,"cat"),ks=Object.keys(CAT).filter(function(k){return cc[k]});
+ mk("catCh",{type:"doughnut",data:{labels:ks.map(function(k){return CAT[k]}),datasets:[{data:ks.map(function(k){return sum(cc[k],"rev")}),backgroundColor:ks.map(function(k){return CCOL[k]}),borderColor:"#121936",borderWidth:3}]},options:{responsive:true,maintainAspectRatio:false,cutout:"62%",animation:{duration:900},plugins:{legend:{position:"bottom",labels:{boxWidth:8,font:{size:10}}},tooltip:{callbacks:{label:function(c){var t=c.dataset.data.reduce(function(s,v){return s+v},0);return c.label+": "+M2(c.parsed)+" ("+(c.parsed/t*100).toFixed(1)+"%)"}}}}}});
+ var yrs=sel.slice().sort(),all=Object.keys(CAT).filter(function(k){return R.some(function(r){return r.cat===k})});
+ var h="<table><tr><th>Category</th>"+yrs.map(function(y){return"<th>"+y+"</th>"}).join("")+"<th>Total</th></tr>";
+ all.forEach(function(k){var v=yrs.map(function(y){return sum(R.filter(function(r){return r.cat===k&&r.year===y}),"rev")});h+="<tr><td>"+CAT[k]+"</td>"+v.map(function(x){return"<td>"+(x?fmt(x):"")+"</td>"}).join("")+"<td>"+fmt(v.reduce(function(s,x){return s+x},0))+"</td></tr>"});
+ var tv=yrs.map(function(y){return sum(R.filter(function(r){return r.year===y}),"rev")});h+='<tr class="tot"><td>Total</td>'+tv.map(function(x){return"<td>"+fmt(x)+"</td>"}).join("")+"<td>"+fmt(tv.reduce(function(s,x){return s+x},0))+"</td></tr></table>";
+ document.getElementById("catTable").innerHTML=h}
+
+function countries(){var yr=function(c,y){return sum(R.filter(function(r){return r.country===c&&r.year===y}),"rev")};
+ mk("ycCh",{type:"bar",data:{labels:YEARS,datasets:["DE","US"].map(function(c){return{label:CTRY[c],data:YEARS.map(function(y){return yr(c,y)/1e6}),backgroundColor:TCOL[c],borderRadius:6}})},options:{responsive:true,maintainAspectRatio:false,animation:{duration:900},plugins:{tooltip:{callbacks:{label:function(c){return c.dataset.label+": $"+c.parsed.y.toFixed(2)+"M"}}}},scales:{y:{ticks:{callback:function(v){return"$"+v+"M"}}},x:{grid:{display:false}}}}});
+ var mgv=function(c){var a=R.filter(function(r){return r.country===c&&sel.indexOf(r.year)>-1});var r=sum(a,"rev");return(r-sum(a,"cogm"))/r*100};
+ mk("mgCh",{type:"bar",data:{labels:["Germany","United States"],datasets:[{data:[mgv("DE"),mgv("US")],backgroundColor:["#8b6cff","#f5b84b"],borderRadius:8}]},options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,animation:{duration:900},plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.parsed.x.toFixed(1)+"%"}}}},scales:{x:{min:0,ticks:{callback:function(v){return v+"%"}}},y:{grid:{display:false}}}}});
+ var de=YEARS.map(function(y){return yr("DE",y)}),us=YEARS.map(function(y){return yr("US",y)}),g=de.every(function(v,i){return i==0||v>de[i-1]});
+ var ch=(us[2]-us[1])/us[1]*100;
+ document.getElementById("insights").innerHTML='<div class="card"><b>'+(g?"Germany grew every year":"Germany by year")+'</b><span>'+M2(de[0])+" in 2007 to "+M2(de[4])+" in 2011</span></div>"+
+  '<div class="card"><b>US revenue '+(ch<0?"fell ":"rose ")+Math.abs(ch).toFixed(0)+'% in 2009</b><span>'+M2(us[1])+" in 2008 to "+M2(us[2])+" in 2009</span></div>"+
+  '<div class="card"><b>'+M2(us[4])+' US revenue in 2011</b><span>Germany reached '+M2(de[4])+'; the US did not return to its 2007 level of '+M2(us[0])+"</span></div>"}
+
+function cities(){var a=rows(),cg=group(a,"city"),L=Object.keys(cg).map(function(c){var r=sum(cg[c],"rev"),p=r-sum(cg[c],"cogm");return{c:c,r:r,m:p/r*100}}).sort(function(x,y){return y.r-x.r});
+ var t=L.slice(0,10);mk("cityCh",{type:"bar",data:{labels:t.map(function(x){return x.c}),datasets:[{data:t.map(function(x){return x.r/1e6}),backgroundColor:"#8b6cff",borderRadius:6}]},options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,animation:{duration:900},plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return"$"+c.parsed.x.toFixed(2)+"M"}}}},scales:{x:{ticks:{callback:function(v){return"$"+v+"M"}}},y:{grid:{display:false},reverse:false}}}});
+ document.getElementById("cityTable").innerHTML="<table><tr><th>City</th><th>Revenue</th><th>Margin</th></tr>"+L.map(function(x){return"<tr><td>"+x.c+"</td><td>"+fmt(x.r)+"</td><td>"+x.m.toFixed(1)+"%</td></tr>"}).join("")+"</table>"}
+
+function render(){yearsUI();kpis();if(view==="overview")overview();if(view==="countries")countries();if(view==="cities")cities()}
+render();
+
+/* tour */
+var STEPS=[["years","Start with the year","Pick a year or leave it on all years. Every number and chart follows your choice.","overview"],
+["kpis","Four numbers first","Revenue, gross profit, margin and units sold. They show how the business did before any detail.","overview"],
+["c-line","Revenue over time","Monthly revenue shows where sales build up and slow down. Switch to By country to compare the two markets.","overview"],
+["c-country","Where it comes from","Revenue by country and by product category, so you can see which markets and products carry the business.","overview"],
+["c-table","The detail underneath","Exact revenue by category and year, for anyone who wants the figures.","overview"],
+["v-countries","US vs Germany","Germany grew every year. The US fell in 2009 and did not recover to its 2007 level.","countries"]];
+var ti=0,T=document.getElementById("tour"),H=document.getElementById("hole"),TC=document.getElementById("tc");
+function place(){var s=STEPS[ti];if(s[3]!==view)setView(s[3]);
+ setTimeout(function(){var el=document.getElementById(s[0]);if(s[0]==="v-countries")el=document.querySelector("#v-countries");var r=el.getBoundingClientRect(),p=8;
+  H.style.left=r.left-p+"px";H.style.top=r.top-p+"px";H.style.width=r.width+2*p+"px";H.style.height=r.height+2*p+"px";
+  document.getElementById("tt").textContent=s[1];document.getElementById("tp").textContent=s[2];document.getElementById("tn").textContent=(ti+1)+" of "+STEPS.length;
+  document.getElementById("tb").style.visibility=ti?"visible":"hidden";document.getElementById("tx").textContent=ti<STEPS.length-1?"Next":"Finish";
+  var cw=340,x=r.left+r.width/2-cw/2,y=r.bottom+p+14;if(y+190>innerHeight)y=r.top-p-190-14;if(y<10)y=Math.min(innerHeight-200,r.top+20);
+  x=Math.max(14,Math.min(innerWidth-cw-14,x));TC.style.left=x+"px";TC.style.top=y+"px"},s[3]!==view?60:0)}
+function open(){ti=0;T.classList.add("on");setView("overview");setTimeout(place,80)}
+function close(){T.classList.remove("on");setView("overview")}
+document.getElementById("tourBtn").addEventListener("click",open);window.startTour=open;
+document.getElementById("tx").addEventListener("click",function(){if(ti<STEPS.length-1){ti++;place()}else close()});
+document.getElementById("tb").addEventListener("click",function(){if(ti){ti--;place()}});
+T.addEventListener("click",function(e){if(e.target===T)close()});
+window.setYears=function(a){sel=a;render()};window.goView=setView;window.__tour={next:function(){document.getElementById("tx").click()},open:open,close:close};
+})();
+</script>
+</body>
+</html>
