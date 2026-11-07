@@ -299,3 +299,28 @@ section.area { padding: 0; margin-top: 48px; scroll-margin-top: 110px; }
 .areahead h2 { margin: 0; font-size: 30px; letter-spacing: -.6px; }
 .areahead p { margin: 4px 0 0; color: var(--muted); font-size: 15px; }
 @media (max-width: 600px) { .areahead h2 { font-size: 23px; } }
+/* projects page: layers (area -> tool -> projects) */
+.layer[hidden], .pcard[hidden] { display: none !important; }
+.crumb { font-size: 14px; color: var(--muted); margin-bottom: 18px; min-height: 20px; }
+.crumb a { color: var(--gold); text-decoration: none; }
+.crumb a:hover { text-decoration: underline; }
+.crumb i { font-style: normal; margin: 0 6px; opacity: .6; }
+.atiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin-top: 30px; }
+.atile, .ttile { display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: var(--text); background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 24px; transition: border-color .2s, transform .2s; }
+.atile:hover, .ttile:hover { border-color: var(--gold); transform: translateY(-3px); }
+.atile b { font-size: 24px; letter-spacing: -.4px; }
+.a-k { font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--gold); }
+.a-d, .tt-desc { color: var(--muted); font-size: 15px; }
+.a-t, .tt-names { font-size: 13px; color: var(--text); opacity: .85; }
+.a-n, .tt-n { margin-top: auto; padding-top: 10px; font-weight: 700; font-size: 14px; color: var(--gold); }
+.ttiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin-top: 18px; }
+.ttile { padding: 18px 20px; border-radius: 14px; }
+.ttile b { font-size: 19px; }
+.tgroup { margin: 30px 0 0; font-size: 15px; color: var(--muted); font-weight: 600; letter-spacing: .3px; }
+#L3 .cards { margin-top: 26px; }
+#L3 .pcard { min-height: 0; }
+@media (max-width: 600px) { .ttiles { grid-template-columns: 1fr 1fr; gap: 10px; } .ttile { padding: 14px; } .ttile b { font-size: 16px; } .tt-desc, .tt-names { font-size: 12.5px; } }
+/* data science page: tools listed once above the projects */
+.dstools { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px 22px; margin-top: 10px; }
+.dsgroup .tgroup { margin: 14px 0 8px; }
+.dsgroup .chips { display: flex; flex-wrap: wrap; gap: 8px; }

@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style.css?v=20261107b">
 </head>
 <body>
 <header class="nav">
@@ -27,17 +27,36 @@
 <main>
 <section style="padding-top:60px">
   <div class="wrap">
-    <div class="eyebrow">Projects</div>
-    <h2 class="title"><span class="grad">Selected work</span></h2>
-    <p class="lede">Two areas: data analysis and business intelligence, and data science and engineering. Within each, projects are grouped by tool. Each one has the code, a short brief and the findings on GitHub.</p>
-    <div class="filters tracknav" role="tablist" aria-label="Choose an area"><button class="fchip on" data-t="all">All <b>12</b></button><button class="fchip" data-t="bi">Data Analysis &amp; BI <b>10</b></button><button class="fchip" data-t="ds">Data Science &amp; Engineering <b>2</b></button></div>
-    <div class="filters toolnav" role="tablist" aria-label="Filter projects by tool"><button class="fchip on" data-f="all">All tools</button><button class="fchip" data-f="power-bi" data-t="bi">Power BI <b>6</b></button><button class="fchip" data-f="excel" data-t="bi">Excel <b>2</b></button><button class="fchip" data-f="tableau" data-t="bi">Tableau <b>1</b></button><button class="fchip" data-f="sql" data-t="bi">SQL <b>1</b></button><button class="fchip" data-f="python" data-t="ds">Python &amp; ML <b>2</b></button></div>
-    <section class="area" id="data-analysis" data-track="bi">
-      <div class="areahead"><h2>Data Analysis &amp; Business Intelligence</h2><p>Reports, dashboards and analysis that answer business questions.</p></div>
-    <section class="toolgroup" id="power-bi" data-group="power-bi">
-      <div class="toolhead"><h3>Power BI</h3><span>6 projects · Reports, DAX models and dashboards</span></div>
-      <div class="cards">
-      <article class="pcard vcard feature rv d0" data-tag="Power BI">
+    <nav class="crumb" id="crumb" aria-label="Where you are"></nav>
+    <div class="layer" id="L1">
+      <div class="eyebrow">Projects</div>
+      <h2 class="title"><span class="grad">Selected work</span></h2>
+      <p class="lede">Two areas of work. Open one to see the tools, then open a tool to see the projects built with it.</p>
+      <div class="atiles">
+        <a class="atile" href="#bi"><span class="a-k">Area 1</span><b>Data Analysis &amp; Business Intelligence</b><span class="a-d">Reports, dashboards and analysis that answer business questions.</span><span class="a-t">Power BI · Excel · Tableau · SQL</span><span class="a-n">10 projects →</span></a>
+        <a class="atile" href="#ds"><span class="a-k">Area 2</span><b>Data Science &amp; Engineering</b><span class="a-d">Data pipelines, warehouses, tests, machine learning and model APIs.</span><span class="a-t">Python · pandas · scikit-learn · LightGBM · dbt · DuckDB · FastAPI · and more</span><span class="a-n">2 projects →</span></a>
+      </div>
+    </div>
+    <div class="layer" id="L2bi" hidden>
+      <h2 class="title"><span class="grad">Data Analysis &amp; Business Intelligence</span></h2>
+      <p class="lede">Pick a tool to see the projects built with it.</p>
+      <div class="ttiles">
+<a class="ttile" href="#bi/power-bi"><b>Power BI</b><span class="tt-desc">Reports, DAX models and dashboards</span><span class="tt-n">6 projects →</span></a>
+<a class="ttile" href="#bi/excel"><b>Excel</b><span class="tt-desc">Workbooks, pivots and slicers</span><span class="tt-n">2 projects →</span></a>
+<a class="ttile" href="#bi/tableau"><b>Tableau</b><span class="tt-desc">Dashboards and data storytelling</span><span class="tt-n">1 project →</span></a>
+<a class="ttile" href="#bi/sql"><b>SQL</b><span class="tt-desc">Queries on a relational database</span><span class="tt-n">1 project →</span></a>
+      </div>
+    </div>
+    <div class="layer" id="L2ds" hidden>
+      <h2 class="title"><span class="grad">Data Science &amp; Engineering</span></h2>
+      <p class="lede">Data pipelines, warehouses, tests, machine learning and model APIs. The tools used across these projects:</p>
+      <div class="dstools"><div class="dsgroup"><h3 class="tgroup">Programming and data handling</h3><div class="chips"><span class="chip">Python</span><span class="chip">pandas</span><span class="chip">NumPy</span><span class="chip">SQL</span></div></div><div class="dsgroup"><h3 class="tgroup">Machine learning</h3><div class="chips"><span class="chip">scikit-learn</span><span class="chip">LightGBM</span><span class="chip">SHAP</span><span class="chip">Matplotlib</span></div></div><div class="dsgroup"><h3 class="tgroup">Data engineering and testing</h3><div class="chips"><span class="chip">dbt</span><span class="chip">DuckDB</span><span class="chip">pytest</span><span class="chip">GitHub Actions</span></div></div><div class="dsgroup"><h3 class="tgroup">Apps and reporting</h3><div class="chips"><span class="chip">FastAPI</span><span class="chip">Streamlit</span><span class="chip">Power BI</span></div></div></div>
+    </div>
+    <div class="layer" id="L3" hidden>
+      <h2 class="title" id="L3title"></h2>
+      <p class="lede" id="L3lede"></p>
+      <div class="cards" id="cards">
+      <article data-area="bi" data-tools="power-bi" class="pcard vcard rv d0" data-tag="Power BI">
         <div class="shot">
           <div class="ticker" aria-hidden="true"><span>196 CASES  ·  49 COUNTRIES  ·  3.0-YEAR PAYBACK  ·  34% RETURN  ·  SUBSIDY SIMULATOR  ·  POWER BI  ·  196 CASES  ·  49 COUNTRIES  ·  3.0-YEAR PAYBACK  ·  34% RETURN  ·  SUBSIDY SIMULATOR  ·  POWER BI  ·  196 CASES  ·  49 COUNTRIES  ·  3.0-YEAR PAYBACK  ·  34% RETURN  ·  SUBSIDY SIMULATOR  ·  POWER BI  ·  196 CASES  ·  49 COUNTRIES  ·  3.0-YEAR PAYBACK  ·  34% RETURN  ·  SUBSIDY SIMULATOR  ·  POWER BI  ·  </span></div>
           <video class="cover" src="projects/solar/solar-tour.mp4" poster="projects/solar/poster.jpg" muted loop playsinline preload="none" aria-label="Silent screen recording of every page of the Solar for African SMEs Power BI report"></video>
@@ -51,7 +70,7 @@
           <div class="actions"><a class="btn fill sm" href="projects/solar/">See every page</a><a class="btn line sm" href="https://github.com/bihbrandysango-cloud/solar-sme-financial-impact" target="_blank" rel="noopener">Power BI files</a><button class="btn line sm watch" type="button">Watch video</button></div>
         </div>
       </article>
-      <article class="pcard vcard rv d0" data-tag="Power BI">
+      <article data-area="bi" data-tools="power-bi" class="pcard vcard rv d0" data-tag="Power BI">
         <div class="shot">
           <div class="ticker" aria-hidden="true"><span>20,000 APPOINTMENTS  ·  $6.31M BILLED  ·  9 PAGES  ·  61 DAX MEASURES  ·  NO-SHOW SIMULATOR  ·  POWER BI  ·  20,000 APPOINTMENTS  ·  $6.31M BILLED  ·  9 PAGES  ·  61 DAX MEASURES  ·  NO-SHOW SIMULATOR  ·  POWER BI  ·  20,000 APPOINTMENTS  ·  $6.31M BILLED  ·  9 PAGES  ·  61 DAX MEASURES  ·  NO-SHOW SIMULATOR  ·  POWER BI  ·  20,000 APPOINTMENTS  ·  $6.31M BILLED  ·  9 PAGES  ·  61 DAX MEASURES  ·  NO-SHOW SIMULATOR  ·  POWER BI  ·  </span></div>
           <video class="cover" src="projects/vitalis/vitalis-tour.mp4" poster="projects/vitalis/poster.jpg" muted loop playsinline preload="none" aria-label="Silent screen recording of every page of the Vitalis Power BI report"></video>
@@ -65,7 +84,7 @@
           <div class="actions"><a class="btn fill sm" href="projects/vitalis/">See every page</a><a class="btn line sm" href="https://github.com/bihbrandysango-cloud/vitalis-healthcare" target="_blank" rel="noopener">Power BI files</a><button class="btn line sm watch" type="button">Watch video</button></div>
         </div>
       </article>
-      <article class="pcard vcard rv d0" data-tag="Capstone">
+      <article data-area="bi" data-tools="power-bi" class="pcard vcard rv d0" data-tag="Capstone">
         <div class="shot">
           <div class="ticker" aria-hidden="true"><span>12.8M SALES LINES  ·  80 STORES  ·  $452.1M SALES  ·  28.8% MARGIN  ·  WHAT-IF SIMULATOR  ·  POWER BI + WEB  ·  12.8M SALES LINES  ·  80 STORES  ·  $452.1M SALES  ·  28.8% MARGIN  ·  WHAT-IF SIMULATOR  ·  POWER BI + WEB  ·  12.8M SALES LINES  ·  80 STORES  ·  $452.1M SALES  ·  28.8% MARGIN  ·  WHAT-IF SIMULATOR  ·  POWER BI + WEB  ·  12.8M SALES LINES  ·  80 STORES  ·  $452.1M SALES  ·  28.8% MARGIN  ·  WHAT-IF SIMULATOR  ·  POWER BI + WEB  ·  </span></div>
           <video class="cover" src="assets/video/justdrinks-walkthrough.mp4" poster="assets/img/projects/justdrinks-cover.jpg" muted loop playsinline preload="none" aria-label="Silent screen recording of the JustDrinks web dashboard"></video>
@@ -79,7 +98,7 @@
           <div class="actions"><a class="btn fill sm" href="projects/justdrinks/">Live dashboard</a><a class="btn line sm" href="https://github.com/bihbrandysango-cloud/justdrinks-ltd-analysis#report-pages" target="_blank" rel="noopener">Power BI report</a><button class="btn line sm watch" type="button">Watch video</button></div>
         </div>
       </article>
-      <article class="pcard vcard rv d0" data-tag="Power BI">
+      <article data-area="bi" data-tools="power-bi" class="pcard vcard rv d0" data-tag="Power BI">
         <div class="shot">
           <div class="ticker" aria-hidden="true"><span>$285M REVENUE  ·  23 CITIES  ·  5 YEARS  ·  52.3% MARGIN  ·  GUIDED TOUR  ·  POWER BI + WEB  ·  $285M REVENUE  ·  23 CITIES  ·  5 YEARS  ·  52.3% MARGIN  ·  GUIDED TOUR  ·  POWER BI + WEB  ·  $285M REVENUE  ·  23 CITIES  ·  5 YEARS  ·  52.3% MARGIN  ·  GUIDED TOUR  ·  POWER BI + WEB  ·  $285M REVENUE  ·  23 CITIES  ·  5 YEARS  ·  52.3% MARGIN  ·  GUIDED TOUR  ·  POWER BI + WEB  ·  </span></div>
           <video class="cover" src="projects/palmpay/palmpay-tour.mp4" poster="projects/palmpay/poster.jpg" muted loop playsinline preload="none" aria-label="Silent screen recording of the Palmpay web dashboard"></video>
@@ -93,7 +112,7 @@
           <div class="actions"><a class="btn fill sm" href="projects/palmpay/">Live dashboard</a><a class="btn line sm" href="https://github.com/bihbrandysango-cloud/palmpay-bi-assessment" target="_blank" rel="noopener">Power BI report</a><button class="btn line sm watch" type="button">Watch video</button></div>
         </div>
       </article>
-      <article class="pcard rv d0" data-tag="Power BI">
+      <article data-area="bi" data-tools="power-bi" class="pcard rv d0" data-tag="Power BI">
         <div class="shot"><img src="assets/img/projects/revenue.jpg" alt="Revenue Rhythm dashboard" loading="lazy"></div>
         <div class="body">
           <h3>Revenue Rhythm <span class="tag">· Power BI</span></h3>
@@ -102,7 +121,7 @@
           <div class="actions"><a class="btn fill sm" href="https://github.com/bihbrandysango-cloud/revenue-rhythm" target="_blank" rel="noopener">GitHub</a></div>
         </div>
       </article>
-      <article class="pcard rv d2" data-tag="Power BI">
+      <article data-area="bi" data-tools="power-bi" class="pcard rv d2" data-tag="Power BI">
         <div class="shot"><img src="assets/img/projects/financial.jpg" alt="Financial Sales Analysis dashboard" loading="lazy"></div>
         <div class="body">
           <h3>Financial Sales Analysis <span class="tag">· Power BI</span></h3>
@@ -111,12 +130,7 @@
           <div class="actions"><a class="btn fill sm" href="https://github.com/bihbrandysango-cloud/financial-sales-analysis" target="_blank" rel="noopener">GitHub</a></div>
         </div>
       </article>
-      </div>
-    </section>
-    <section class="toolgroup" id="excel" data-group="excel">
-      <div class="toolhead"><h3>Excel</h3><span>2 projects · Workbooks, pivots and slicers</span></div>
-      <div class="cards">
-      <article class="pcard vcard rv d1" data-tag="Excel">
+      <article data-area="bi" data-tools="excel" class="pcard vcard rv d1" data-tag="Excel">
         <div class="shot">
           <div class="ticker" aria-hidden="true"><span>110,300 VISITS  ·  $276M COST  ·  5,000 PATIENTS  ·  SIX SLICERS  ·  COST PER PATIENT  ·  EXCEL + WEB  ·  110,300 VISITS  ·  $276M COST  ·  5,000 PATIENTS  ·  SIX SLICERS  ·  COST PER PATIENT  ·  EXCEL + WEB  ·  110,300 VISITS  ·  $276M COST  ·  5,000 PATIENTS  ·  SIX SLICERS  ·  COST PER PATIENT  ·  EXCEL + WEB  ·  110,300 VISITS  ·  $276M COST  ·  5,000 PATIENTS  ·  SIX SLICERS  ·  COST PER PATIENT  ·  EXCEL + WEB  ·  </span></div>
           <video class="cover" src="projects/health/health-tour.mp4" poster="projects/health/poster.jpg" muted loop playsinline preload="none" aria-label="Silent screen recording of the Health Analysis live dashboard"></video>
@@ -130,7 +144,7 @@
           <div class="actions"><a class="btn fill sm" href="projects/health/">Live dashboard</a><a class="btn line sm" href="https://github.com/bihbrandysango-cloud/Health-Analysis-Excel" target="_blank" rel="noopener">Excel workbook</a><button class="btn line sm watch" type="button">Watch video</button></div>
         </div>
       </article>
-      <article class="pcard vcard rv d1" data-tag="Excel">
+      <article data-area="bi" data-tools="excel" class="pcard vcard rv d1" data-tag="Excel">
         <div class="shot">
           <div class="ticker" aria-hidden="true"><span>832 TRANSACTIONS  ·  $985K REVENUE  ·  8.8% UNDER TARGET  ·  4 OF 12 MONTHS  ·  RISK SIMULATOR  ·  EXCEL + WEB  ·  832 TRANSACTIONS  ·  $985K REVENUE  ·  8.8% UNDER TARGET  ·  4 OF 12 MONTHS  ·  RISK SIMULATOR  ·  EXCEL + WEB  ·  832 TRANSACTIONS  ·  $985K REVENUE  ·  8.8% UNDER TARGET  ·  4 OF 12 MONTHS  ·  RISK SIMULATOR  ·  EXCEL + WEB  ·  832 TRANSACTIONS  ·  $985K REVENUE  ·  8.8% UNDER TARGET  ·  4 OF 12 MONTHS  ·  RISK SIMULATOR  ·  EXCEL + WEB  ·  </span></div>
           <video class="cover" src="projects/sales/sales-tour.mp4" poster="projects/sales/poster.jpg" muted loop playsinline preload="none" aria-label="Silent screen recording of the Sales Performance vs Target live dashboard"></video>
@@ -144,12 +158,7 @@
           <div class="actions"><a class="btn fill sm" href="projects/sales/">Live dashboard</a><a class="btn line sm" href="https://github.com/bihbrandysango-cloud/Sales-Analysis-Excel" target="_blank" rel="noopener">Excel workbook</a><button class="btn line sm watch" type="button">Watch video</button></div>
         </div>
       </article>
-      </div>
-    </section>
-    <section class="toolgroup" id="tableau" data-group="tableau">
-      <div class="toolhead"><h3>Tableau</h3><span>1 project · Dashboards and data storytelling</span></div>
-      <div class="cards">
-      <article class="pcard vcard rv d1" data-tag="Tableau">
+      <article data-area="bi" data-tools="tableau" class="pcard vcard rv d1" data-tag="Tableau">
         <div class="shot">
           <div class="ticker" aria-hidden="true"><span>500,000 RECORDS  ·  185 COUNTRIES  ·  $665B INCOME  ·  70.5% SPENT  ·  12 SEGMENTS  ·  LOAN SIMULATOR  ·  500,000 RECORDS  ·  185 COUNTRIES  ·  $665B INCOME  ·  70.5% SPENT  ·  12 SEGMENTS  ·  LOAN SIMULATOR  ·  500,000 RECORDS  ·  185 COUNTRIES  ·  $665B INCOME  ·  70.5% SPENT  ·  12 SEGMENTS  ·  LOAN SIMULATOR  ·  500,000 RECORDS  ·  185 COUNTRIES  ·  $665B INCOME  ·  70.5% SPENT  ·  12 SEGMENTS  ·  LOAN SIMULATOR  ·  </span></div>
           <video class="cover" src="projects/consumer-spending/consumer-tour.mp4" poster="projects/consumer-spending/poster.jpg" muted loop playsinline preload="none" aria-label="Silent screen recording of the Consumer Spending Power live dashboard"></video>
@@ -163,12 +172,7 @@
           <div class="actions"><a class="btn fill sm" href="projects/consumer-spending/">Live dashboard</a><a class="btn line sm" href="https://github.com/bihbrandysango-cloud/credpal-consumer-spending-tableau" target="_blank" rel="noopener">Tableau workbook</a><button class="btn line sm watch" type="button">Watch video</button></div>
         </div>
       </article>
-      </div>
-    </section>
-    <section class="toolgroup" id="sql" data-group="sql">
-      <div class="toolhead"><h3>SQL</h3><span>1 project · Queries on a relational database</span></div>
-      <div class="cards">
-      <article class="pcard vcard rv d1" data-tag="SQL">
+      <article data-area="bi" data-tools="sql" class="pcard vcard rv d1" data-tag="SQL">
         <div class="shot">
           <div class="ticker" aria-hidden="true"><span>1,047 SALES  ·  $105.6M PROFIT  ·  5 COUNTRIES  ·  7 BRANDS  ·  20 SQL QUERIES  ·  LIVE SQL LAB  ·  1,047 SALES  ·  $105.6M PROFIT  ·  5 COUNTRIES  ·  7 BRANDS  ·  20 SQL QUERIES  ·  LIVE SQL LAB  ·  1,047 SALES  ·  $105.6M PROFIT  ·  5 COUNTRIES  ·  7 BRANDS  ·  20 SQL QUERIES  ·  LIVE SQL LAB  ·  1,047 SALES  ·  $105.6M PROFIT  ·  5 COUNTRIES  ·  7 BRANDS  ·  20 SQL QUERIES  ·  LIVE SQL LAB  ·  </span></div>
           <video class="cover" src="projects/brewery/brewery-tour.mp4" poster="projects/brewery/poster.jpg" muted loop playsinline preload="none" aria-label="Silent screen recording of the West Africa Brewery live dashboard"></video>
@@ -182,15 +186,7 @@
           <div class="actions"><a class="btn fill sm" href="projects/brewery/">Live dashboard</a><a class="btn line sm" href="https://github.com/bihbrandysango-cloud/west-africa-brewery-sql-analysis" target="_blank" rel="noopener">SQL on GitHub</a><button class="btn line sm watch" type="button">Watch video</button></div>
         </div>
       </article>
-      </div>
-    </section>
-    </section>
-    <section class="area" id="data-science" data-track="ds">
-      <div class="areahead"><h2>Data Science &amp; Engineering</h2><p>Pipelines, data warehouses, tests and machine learning.</p></div>
-    <section class="toolgroup" id="python" data-group="python">
-      <div class="toolhead"><h3>Python &amp; ML</h3><span>2 projects · Data pipelines, warehouses, testing, forecasting and fraud detection</span></div>
-      <div class="cards">
-      <article class="pcard feature rv d0" data-tag="Python">
+      <article data-area="ds" data-tools="python pandas numpy sql scikit-learn dbt duckdb pytest github-actions power-bi" class="pcard rv d0" data-tag="Python">
         <div class="shot"><img src="projects/food-price-watch/pipeline-card.jpg" alt="Pipeline diagram of Cameroon Food Price Watch: HDX API, Python fetch, dbt on DuckDB, forecast, export, run monthly by GitHub Actions" loading="lazy"></div>
         <div class="body">
           <h3>Cameroon Food Price Watch <span class="tag">· Python · dbt · ML</span></h3>
@@ -199,7 +195,7 @@
           <div class="actions"><a class="btn fill sm" href="projects/food-price-watch/">How it works</a><a class="btn line sm" href="https://github.com/bihbrandysango-cloud/cameroon-food-price-watch" target="_blank" rel="noopener">Code on GitHub</a><a class="btn line sm" href="projects/food-price-watch/#v">Watch the report</a></div>
         </div>
       </article>
-      <article class="pcard feature rv d1" data-tag="Python">
+      <article data-area="ds" data-tools="python pandas numpy scikit-learn lightgbm shap matplotlib duckdb pytest github-actions fastapi streamlit" class="pcard rv d1" data-tag="Python">
         <div class="shot"><img src="projects/fraud-alarm/card.jpg" alt="Bar chart: when thieves change habits, the new fraud alarm still catches 73 to 100% of thefts while older alarms fall to about 25%" loading="lazy"></div>
         <div class="body">
           <h3>Mobile Money Fraud Alarm <span class="tag">· Python · ML · SHAP</span></h3>
@@ -209,8 +205,7 @@
         </div>
       </article>
       </div>
-    </section>
-    </section>
+    </div>
   </div>
 </section>
 </main>
@@ -229,14 +224,31 @@
 <script src="assets/js/main.js"></script>
 <script src="assets/js/video-card.js"></script>
 <script>
-(function(){var tchips=document.querySelectorAll(".tracknav .fchip"),chips=document.querySelectorAll(".toolnav .fchip"),tracks=document.querySelectorAll(".area"),groups=document.querySelectorAll(".toolgroup"),track="all",tool="all";
-function show(){tracks.forEach(function(t){t.classList.toggle("hide",track!=="all"&&t.dataset.track!==track)});
-chips.forEach(function(c){c.classList.toggle("hide",track!=="all"&&c.dataset.t&&c.dataset.t!==track);c.classList.toggle("on",c.dataset.f===tool)});
-tchips.forEach(function(c){c.classList.toggle("on",c.dataset.t===track)});
-groups.forEach(function(g){g.classList.toggle("hide",tool!=="all"&&g.dataset.group!==tool)})}
-tchips.forEach(function(c){c.addEventListener("click",function(){track=c.dataset.t;tool="all";show()})});
-chips.forEach(function(c){c.addEventListener("click",function(){tool=c.dataset.f;if(c.dataset.t)track=c.dataset.t;show()})});
-var h=location.hash.replace("#","");if(h==="data-analysis"){track="bi"}else if(h==="data-science"){track="ds"}else{chips.forEach(function(c){if(c.dataset.f===h){tool=h;track=c.dataset.t}})}show()})();
+(function(){
+var L={bi:"Data Analysis & Business Intelligence",ds:"Data Science & Engineering"};
+var old={"data-analysis":"bi","data-science":"ds","power-bi":"bi/power-bi","excel":"bi/excel","tableau":"bi/tableau","sql":"bi/sql","python":"ds"};
+var crumb=document.getElementById("crumb"),cards=document.querySelectorAll("#cards .pcard");
+function name(area,tool){var a=document.querySelector('.ttile[href="#'+area+'/'+tool+'"] b');return a?a.textContent:tool}
+function show(){
+  var h=decodeURIComponent(location.hash.replace("#",""));if(old[h])h=old[h];
+  var parts=h.split("/"),area=L[parts[0]]?parts[0]:"",tool=area==="bi"&&parts[1]?parts[1]:"";
+  document.getElementById("L3title").hidden=document.getElementById("L3lede").hidden=false;
+  document.querySelectorAll(".layer").forEach(function(x){x.hidden=true});
+  var c='<a href="#">Projects</a>';
+  if(!area){document.getElementById("L1").hidden=false;crumb.innerHTML="";}
+  else if(area==="ds"){document.getElementById("L2ds").hidden=false;cards.forEach(function(k){k.hidden=k.dataset.area!=="ds"});document.getElementById("L3title").hidden=document.getElementById("L3lede").hidden=true;document.getElementById("L3").hidden=false;crumb.innerHTML=c+' <i>›</i> <span>'+L[area]+'</span>';}
+  else if(!tool){document.getElementById("L2"+area).hidden=false;crumb.innerHTML=c+' <i>›</i> <span>'+L[area]+'</span>';}
+  else{
+    var n=0;cards.forEach(function(k){var on=k.dataset.area===area&&k.dataset.tools.split(" ").indexOf(tool)>-1;k.hidden=!on;if(on)n++});
+    document.getElementById("L3title").innerHTML='<span class="grad">'+name(area,tool)+'</span>';
+    document.getElementById("L3lede").textContent=n+(n===1?" project":" projects")+" in "+L[area]+" built with "+name(area,tool)+".";
+    document.getElementById("L3").hidden=false;
+    crumb.innerHTML=c+' <i>›</i> <a href="#'+area+'">'+L[area]+'</a> <i>›</i> <span>'+name(area,tool)+'</span>';
+  }
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",show);show();
+})();
 </script>
 </body>
 </html>
