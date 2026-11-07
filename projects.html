@@ -30,8 +30,8 @@
     <div class="eyebrow">Projects</div>
     <h2 class="title"><span class="grad">Selected work</span></h2>
     <p class="lede">Two areas: data analysis and business intelligence, and data science and engineering. Within each, projects are grouped by tool. Each one has the code, a short brief and the findings on GitHub.</p>
-    <div class="filters tracknav" role="tablist" aria-label="Choose an area"><button class="fchip on" data-t="all">All <b>11</b></button><button class="fchip" data-t="bi">Data Analysis &amp; BI <b>10</b></button><button class="fchip" data-t="ds">Data Science &amp; Engineering <b>1</b></button></div>
-    <div class="filters toolnav" role="tablist" aria-label="Filter projects by tool"><button class="fchip on" data-f="all">All tools</button><button class="fchip" data-f="power-bi" data-t="bi">Power BI <b>6</b></button><button class="fchip" data-f="excel" data-t="bi">Excel <b>2</b></button><button class="fchip" data-f="tableau" data-t="bi">Tableau <b>1</b></button><button class="fchip" data-f="sql" data-t="bi">SQL <b>1</b></button><button class="fchip" data-f="python" data-t="ds">Python &amp; ML <b>1</b></button></div>
+    <div class="filters tracknav" role="tablist" aria-label="Choose an area"><button class="fchip on" data-t="all">All <b>12</b></button><button class="fchip" data-t="bi">Data Analysis &amp; BI <b>10</b></button><button class="fchip" data-t="ds">Data Science &amp; Engineering <b>2</b></button></div>
+    <div class="filters toolnav" role="tablist" aria-label="Filter projects by tool"><button class="fchip on" data-f="all">All tools</button><button class="fchip" data-f="power-bi" data-t="bi">Power BI <b>6</b></button><button class="fchip" data-f="excel" data-t="bi">Excel <b>2</b></button><button class="fchip" data-f="tableau" data-t="bi">Tableau <b>1</b></button><button class="fchip" data-f="sql" data-t="bi">SQL <b>1</b></button><button class="fchip" data-f="python" data-t="ds">Python &amp; ML <b>2</b></button></div>
     <section class="area" id="data-analysis" data-track="bi">
       <div class="areahead"><h2>Data Analysis &amp; Business Intelligence</h2><p>Reports, dashboards and analysis that answer business questions.</p></div>
     <section class="toolgroup" id="power-bi" data-group="power-bi">
@@ -188,7 +188,7 @@
     <section class="area" id="data-science" data-track="ds">
       <div class="areahead"><h2>Data Science &amp; Engineering</h2><p>Pipelines, data warehouses, tests and machine learning.</p></div>
     <section class="toolgroup" id="python" data-group="python">
-      <div class="toolhead"><h3>Python &amp; ML</h3><span>1 project · Data pipelines, warehouses, testing and forecasting</span></div>
+      <div class="toolhead"><h3>Python &amp; ML</h3><span>2 projects · Data pipelines, warehouses, testing, forecasting and fraud detection</span></div>
       <div class="cards">
       <article class="pcard feature rv d0" data-tag="Python">
         <div class="shot"><img src="projects/food-price-watch/pipeline-card.jpg" alt="Pipeline diagram of Cameroon Food Price Watch: HDX API, Python fetch, dbt on DuckDB, forecast, export, run monthly by GitHub Actions" loading="lazy"></div>
@@ -197,6 +197,15 @@
           <div class="tools-line">Python · pandas · scikit-learn · dbt · DuckDB · pytest · GitHub Actions · Power BI</div>
           <p>A monthly data pipeline over World Food Programme prices in <strong>76</strong> markets, with <strong>24</strong> data checks, <strong>21</strong> code tests and a forecast tested on <strong>5,136</strong> predictions. It found a maize crash: <strong>15 of 18</strong> markets well below normal.</p>
           <div class="actions"><a class="btn fill sm" href="projects/food-price-watch/">How it works</a><a class="btn line sm" href="https://github.com/bihbrandysango-cloud/cameroon-food-price-watch" target="_blank" rel="noopener">Code on GitHub</a><a class="btn line sm" href="projects/food-price-watch/#v">Watch the report</a></div>
+        </div>
+      </article>
+      <article class="pcard feature rv d1" data-tag="Python">
+        <div class="shot"><img src="projects/fraud-alarm/card.jpg" alt="Bar chart: when thieves change habits, the new fraud alarm still catches 73 to 100% of thefts while older alarms fall to about 25%" loading="lazy"></div>
+        <div class="body">
+          <h3>Mobile Money Fraud Alarm <span class="tag">· Python · ML · SHAP</span></h3>
+          <div class="tools-line">Python · DuckDB · LightGBM · scikit-learn · SHAP · FastAPI · Streamlit · JavaScript · pytest · GitHub Actions</div>
+          <p>Public notebooks claim <strong>99%</strong> accuracy on mobile money fraud. On real traffic that model does worse than doing nothing. My alarm, tested against smarter thieves on <strong>6.36 million</strong> transactions, catches <strong>73%</strong> of thefts in the hardest test against <strong>25%</strong> for the original, and stops <strong>96.5%</strong> of the stolen money.</p>
+          <div class="actions"><a class="btn fill sm" href="projects/fraud-alarm/">How it works</a><a class="btn line sm" href="https://pixel-perfect-page-615.lovable.app" target="_blank" rel="noopener">Live demo</a><a class="btn line sm" href="https://github.com/bihbrandysango-cloud/mobile-money-fraud-detection" target="_blank" rel="noopener">Code on GitHub</a></div>
         </div>
       </article>
       </div>
