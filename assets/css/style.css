@@ -289,3 +289,13 @@ a.ccard:hover .cicon { background: rgba(232, 121, 214, .16); }
 .toolgroup .pcard { min-height: 556px; }
 section.toolgroup { padding: 0; margin-top: 34px; }
 .toolnav + .toolgroup { margin-top: 26px; }
+/* projects page: two areas (BI, data science), each grouped by tool */
+.tracknav { margin-bottom: 0; }
+.tracknav .fchip { font-size: 14px; padding: 10px 20px; }
+.toolnav { margin-top: 10px; }
+.toolnav .fchip.hide, .area.hide { display: none; }
+section.area { padding: 0; margin-top: 48px; scroll-margin-top: 110px; }
+.areahead { border-left: 4px solid var(--gold); padding: 2px 0 2px 16px; }
+.areahead h2 { margin: 0; font-size: 30px; letter-spacing: -.6px; }
+.areahead p { margin: 4px 0 0; color: var(--muted); font-size: 15px; }
+@media (max-width: 600px) { .areahead h2 { font-size: 23px; } }
