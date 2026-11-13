@@ -324,3 +324,20 @@ section.area { padding: 0; margin-top: 48px; scroll-margin-top: 110px; }
 .dstools { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px 22px; margin-top: 10px; }
 .dsgroup .tgroup { margin: 14px 0 8px; }
 .dsgroup .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* homepage top: intro on the left, photo on the right */
+.hero { text-align: left; padding: 64px 0 64px; }
+.hgrid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; }
+.hero .pill { text-transform: none; letter-spacing: 0; font-size: 14px; font-weight: 600; }
+.hero h1 { margin: 18px 0 12px; font-size: clamp(36px, 4.6vw, 54px); }
+.hero .tools { font-family: inherit; font-size: 17px; }
+.hero .cta, .hero .social { justify-content: flex-start; }
+.hero .photo { margin: 0 auto; width: min(320px, 70vw); }
+.hero .photo .frame { animation: none; }
+@media (max-width: 860px) {
+  .hgrid { grid-template-columns: 1fr; gap: 36px; }
+  .hero .photo { order: -1; width: min(240px, 64vw); margin: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero .pill, .hero h1, .hero .tools, .hero .cta, .hero .social, .hero .photo { opacity: 1; }
+}
