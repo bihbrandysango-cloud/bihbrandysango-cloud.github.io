@@ -31,6 +31,20 @@
 <tr><td>Same, and the mule already holds money</td><td>20.0%</td><td>9.2%</td><td>25.3%</td><td class="n">73.1% (65-81%)</td></tr>
 </table><p class="note">In the hardest test the new alarm stops 96.5% of the stolen money (about 3.50 of 3.63 billion units over ten days), because it catches the large thefts first. The old alarm stops 76.8%.</p></div>
 
+<h2>False alarms, and how far to trust a score</h2><p class="lead">Every alert sends someone to call a customer, so it matters who gets flagged by mistake. With 300 reviews a day over the ten test days (2,987 reviews):</p>
+<div class="panel"><table>
+<tr><th></th><th>Thieves as simulated</th><th>Smarter thieves</th></tr>
+<tr><td>Honest customers among the alerts</td><td>396 (13%)</td><td class="n">1,209 (40%)</td></tr>
+<tr><td>Honest customers called per day</td><td>about 40</td><td class="n">about 121</td></tr>
+<tr><td>Thefts caught</td><td>2,591 of 2,592</td><td>1,778 of 2,592</td></tr>
+</table><p class="note">Who gets wrongly flagged: mostly cash-outs (77% and 91%), about a third paying into a brand-new account, and about 1 in 10 sending 90% or more of their balance. Their median amount is close to a typical honest transaction, so a false alarm can land on an ordinary customer: a held payment, a phone call, and at an agent, leaving without their cash.</p></div>
+<div class="chart" style="margin-top:14px"><img src="chart-calibration.jpg" alt="Calibration chart: with thieves as simulated, middle risk scores are far too high; with smarter thieves, low and middle scores hide many real thefts. Only scores above 95% match reality." loading="lazy"></div>
+<div class="dec" style="margin-top:14px">
+<section><h3>The score ranks, it doesn't predict</h3><p>With thieves as simulated, transactions scored 50-80% were thefts only 2.5% of the time. With smarter thieves it flips: transactions scored 5-20% were thefts 64% of the time, and about 720 of the 814 missed thefts scored below 1%. A low score does not mean safe.</p></section>
+<section><h3>What the demo does about it</h3><p>It never shows the raw percentage. Alerts say "Check with the customer before the money moves", the alarm is only ever "fairly confident", and every alert adds "About 4 in 10 alerts like this turn out to be honest customers". The alert line comes from a daily review budget, not from trusting the score.</p></section>
+<section><h3>Why it would need recalibrating</h3><p>The scores come from PaySim, whose habits real MTN or Orange traffic may not share. Before showing a score as a probability, an operator would need to recalibrate it on its own confirmed cases. That step is outside this project.</p></section>
+</div>
+
 <h2>How it's built</h2><p class="lead">Each step is a separate script, and one command runs them all. GitHub runs the tests on every push.</p>
 <div class="panel scroll"><svg viewBox="0 0 1100 230" role="img" aria-label="Pipeline: Kaggle download, DuckDB preparation, LightGBM models and tests, comparison over five seeds, SHAP reasons, export to JavaScript, Hugging Face Static Space and the Lovable website">
 <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#5B9BEA"/></marker></defs>
