@@ -88,7 +88,7 @@
 <section><h3>Median of earlier years, not the average</h3><p>One extreme year would drag an average. The median of the same month in earlier years keeps the seasons and ignores outliers, and never peeks at later data.</p></section>
 <section><h3>Flag bad prices, don't delete them</h3><p>1,052 prices are 3 or more times away from the national median. They stay in the warehouse with a flag and their ratio to the national median, but are left out of alerts and forecasts.</p></section>
 <section><h3>A range, not one number</h3><p>Because the model is no more accurate than a naive guess, the report shows an 80% likely range from the model's own past errors, never a single exact price.</p></section>
-<section><h3>Tests that stop the pipeline</h3><p>21 pytest tests run before the fetch, and 24 dbt checks run after every build. If one fails, the monthly job stops and nothing is committed.</p></section>
+<section><h3>Tests that stop the pipeline</h3><p>21 pytest tests run before the fetch, and 27 dbt checks run after every build. If one fails, the monthly job stops and nothing is committed.</p></section>
 </div>
 
 <h2>Blip or real change?</h2><p class="lead">An alert says a price is far from normal, not why. Each flagged price now gets one of four types, using only what was known that month. To check the types, I looked at what happened the following month (used only to check, never to label).</p>
